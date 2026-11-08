@@ -1,7 +1,7 @@
 """Constants for NomadOS."""
 
 DOMAIN = "nomados"
-VERSION = "2.0.2"
+VERSION = "2.1.0"
 
 PANEL_URL = "nomados"
 PANEL_TITLE = "NomadOS"
