@@ -5,7 +5,7 @@
  * `mode: demo` shows example values (for showing off, or before the kit is fitted).
  * Entity ids can be overridden in configuration.yaml under panel_custom > config > entities.
  */
-const VCC_VERSION = "2.1.0";
+const VCC_VERSION = "2.2.0";
 
 // No built-in entity names: the setup wizard picks them for each van
 const VCC_DEFAULT_ENTITIES = {};
@@ -1456,23 +1456,64 @@ const SW_ICON_NAMES = { lights: "Light", awning: "Outside light", pump: "Pump", 
 const NOS_MAX_BUTTONS = 7;
 
 // Common vans: wheelbase and track (width between the wheels) in mm. Close enough for ramp heights.
-// Drawings for each van in the list (side, rear and top), served by the integration
-const NOS_VAN_ART = ["crafter_lwb", "crafter_mwb", "master_mwb", "sprinter_lwb", "sprinter_mwb", "transit_lwb", "transit_mwb", "transporter_swb"];
-function vanArt(model) { return NOS_VAN_ART.includes(model) ? `/nomados_static/vans/${model}` : null; }
+// Vans in the Setup list: id, name, short name, wheelbase mm, width between wheels mm, group.
+// Each one except "other" has side, rear and top drawings in frontend/vans. Sizes are typical figures; owners can change them.
 const NOS_VANS = [
-  ["ducato_l23", "Fiat Ducato / Peugeot Boxer / Citroën Relay · L2 or L3", "Ducato L3", 3450, 1810],
-  ["ducato_l4", "Fiat Ducato / Peugeot Boxer / Citroën Relay · L4", "Ducato L4", 4035, 1810],
-  ["transit_lwb", "Ford Transit · long wheelbase", "Transit LWB", 3750, 1740],
-  ["transit_mwb", "Ford Transit · medium wheelbase", "Transit MWB", 3300, 1740],
-  ["sprinter_lwb", "Mercedes Sprinter · long wheelbase", "Sprinter LWB", 4325, 1710],
-  ["sprinter_mwb", "Mercedes Sprinter · medium wheelbase", "Sprinter MWB", 3665, 1710],
-  ["master_mwb", "Renault Master / Vauxhall Movano · medium wheelbase", "Master MWB", 3682, 1750],
-  ["crafter_lwb", "VW Crafter / MAN TGE · long wheelbase", "Crafter LWB", 4490, 1720],
-  ["crafter_mwb", "VW Crafter / MAN TGE · medium wheelbase", "Crafter MWB", 3640, 1720],
-  ["transporter_lwb", "VW Transporter · long wheelbase", "Transporter LWB", 3400, 1630],
-  ["transporter_swb", "VW Transporter · short wheelbase", "Transporter SWB", 3000, 1630],
-  ["other", "Something else (type the sizes below)", "Campervan", 3500, 1700],
+  ["crafter_mwb", "VW Crafter / MAN TGE (2017 on) · medium wheelbase", "Crafter MWB", 3640, 1720, "Large vans"],
+  ["crafter_lwb", "VW Crafter / MAN TGE (2017 on) · long wheelbase", "Crafter LWB", 4490, 1720, "Large vans"],
+  ["crafter_mk1f", "VW Crafter (2011–2016)", "Crafter", 3665, 1710, "Large vans"],
+  ["crafter_mk1", "VW Crafter (2006–2011)", "Crafter", 3665, 1710, "Large vans"],
+  ["ducato_2024", "Fiat Ducato / Peugeot Boxer / Citroën Relay / Vauxhall Movano (2024 on)", "Ducato", 3450, 1810, "Large vans"],
+  ["ducato_2021", "Fiat Ducato / Peugeot Boxer / Citroën Relay / Vauxhall Movano (2021–2024)", "Ducato", 3450, 1810, "Large vans"],
+  ["ducato_l23", "Fiat Ducato / Peugeot Boxer / Citroën Relay (2014–2021) · L2 or L3", "Ducato L3", 3450, 1810, "Large vans"],
+  ["ducato_l4", "Fiat Ducato / Peugeot Boxer / Citroën Relay (2014–2021) · L4", "Ducato L4", 4035, 1810, "Large vans"],
+  ["ducato_x250", "Fiat Ducato / Peugeot Boxer / Citroën Relay (2006–2014)", "Ducato", 3450, 1810, "Large vans"],
+  ["transit_mwb", "Ford Transit (2019 on) · medium wheelbase", "Transit MWB", 3300, 1740, "Large vans"],
+  ["transit_lwb", "Ford Transit (2019 on) · long wheelbase", "Transit LWB", 3750, 1740, "Large vans"],
+  ["transit_mk8", "Ford Transit (2014–2019)", "Transit", 3300, 1740, "Large vans"],
+  ["transit_mk7", "Ford Transit (2006–2013)", "Transit", 3300, 1740, "Large vans"],
+  ["iveco_daily", "Iveco Daily (2014 on)", "Daily", 3520, 1730, "Large vans"],
+  ["sprinter_mwb", "Mercedes Sprinter (2018 on) · medium wheelbase", "Sprinter MWB", 3665, 1710, "Large vans"],
+  ["sprinter_lwb", "Mercedes Sprinter (2018 on) · long wheelbase", "Sprinter LWB", 4325, 1710, "Large vans"],
+  ["sprinter_w906", "Mercedes Sprinter (2006–2018)", "Sprinter", 3665, 1710, "Large vans"],
+  ["master_2024", "Renault Master (2024 on)", "Master", 3700, 1760, "Large vans"],
+  ["master_mwb", "Renault Master / Vauxhall Movano / Nissan NV400 (2010–2024)", "Master MWB", 3682, 1750, "Large vans"],
+  ["transporter_t7", "VW Transporter T7 (2025 on)", "Transporter T7", 3100, 1690, "Mid-size vans"],
+  ["transporter_swb", "VW Transporter T6.1 (2019–2024) · short wheelbase", "T6.1 SWB", 3000, 1630, "Mid-size vans"],
+  ["transporter_lwb", "VW Transporter T6.1 (2019–2024) · long wheelbase", "T6.1 LWB", 3400, 1630, "Mid-size vans"],
+  ["transporter_t6", "VW Transporter T6 (2015–2019)", "Transporter T6", 3000, 1630, "Mid-size vans"],
+  ["transporter_t51", "VW Transporter T5.1 (2009–2015)", "Transporter T5", 3000, 1630, "Mid-size vans"],
+  ["transporter_t5", "VW Transporter T5 (2003–2009)", "Transporter T5", 3000, 1630, "Mid-size vans"],
+  ["transporter_t4", "VW Transporter T4 (1990–2003)", "Transporter T4", 2920, 1580, "Mid-size vans"],
+  ["transporter_t3", "VW Transporter T3 (1979–1992)", "Transporter T3", 2460, 1570, "Mid-size vans"],
+  ["transporter_t2", "VW Transporter T2 (1967–1979)", "Transporter T2", 2400, 1390, "Mid-size vans"],
+  ["transporter_t1", "VW Transporter T1 (1950–1967)", "Transporter T1", 2400, 1375, "Mid-size vans"],
+  ["custom_mk2", "Ford Transit Custom (2023 on)", "Transit Custom", 3100, 1690, "Mid-size vans"],
+  ["tourneo_custom_mk2", "Ford Tourneo Custom (2023 on)", "Tourneo Custom", 3100, 1690, "Mid-size vans"],
+  ["custom_mk1f", "Ford Transit Custom (2018–2023)", "Transit Custom", 2933, 1700, "Mid-size vans"],
+  ["custom_mk1", "Ford Transit Custom (2012–2018)", "Transit Custom", 2933, 1700, "Mid-size vans"],
+  ["vito_w447", "Mercedes Vito (2014 on)", "Vito", 3200, 1660, "Mid-size vans"],
+  ["vclass_w447", "Mercedes V-Class (2014 on)", "V-Class", 3200, 1660, "Mid-size vans"],
+  ["vito_w639", "Mercedes Vito / Viano (2003–2014)", "Vito", 3200, 1630, "Mid-size vans"],
+  ["trafic_x82", "Renault Trafic / Vauxhall Vivaro / Nissan Primastar / Fiat Talento (2014 on)", "Trafic", 3098, 1620, "Mid-size vans"],
+  ["trafic_x83", "Renault Trafic / Vauxhall Vivaro / Nissan Primastar (2001–2014)", "Trafic", 3098, 1610, "Mid-size vans"],
+  ["dispatch_k0", "Citroën Dispatch / Peugeot Expert / Toyota Proace / Vauxhall Vivaro (2016 on)", "Dispatch", 3275, 1630, "Mid-size vans"],
+  ["staria", "Hyundai Staria (2021 on)", "Staria", 3273, 1710, "Mid-size vans"],
+  ["berlingo_k9", "Citroën Berlingo / Peugeot Partner / Vauxhall Combo / Toyota Proace City (2018 on)", "Berlingo", 2785, 1550, "Small vans"],
+  ["caddy_mk5", "VW Caddy (2020 on)", "Caddy", 2755, 1580, "Small vans"],
+  ["caddy_mk3", "VW Caddy (2004–2020)", "Caddy", 2682, 1540, "Small vans"],
+  ["connect_mk3", "Ford Transit Connect (2024 on)", "Connect", 2755, 1580, "Small vans"],
+  ["connect_mk2", "Ford Transit Connect (2013–2023)", "Connect", 2662, 1570, "Small vans"],
+  ["connect_mk1", "Ford Transit Connect (2002–2013)", "Connect", 2664, 1500, "Small vans"],
+  ["kangoo_mk3", "Renault Kangoo (2021 on)", "Kangoo", 2716, 1580, "Small vans"],
+  ["kangoo_mk2", "Renault Kangoo (2008–2021)", "Kangoo", 2697, 1520, "Small vans"],
+  ["mh_hightop", "High-top campervan (van conversion)", "Campervan", 3450, 1810, "Motorhomes"],
+  ["mh_lowprofile", "Coachbuilt motorhome · low profile", "Motorhome", 3800, 1980, "Motorhomes"],
+  ["mh_overcab", "Coachbuilt motorhome · overcab (Luton)", "Motorhome", 3800, 1980, "Motorhomes"],
+  ["mh_aclass", "A-class motorhome", "Motorhome", 4000, 1980, "Motorhomes"],
+  ["other", "Something else (type the sizes below)", "Campervan", 3500, 1700, "Other"]
 ];
+function vanArt(model) { return model && model !== "other" && NOS_VANS.some((v) => v[0] === model) ? `/nomados_static/vans/${model}` : null; }
 
 // Every sensor the dashboard can use: what it's called, where to look, and how to spot it
 const T = ["°C", "°F"];
@@ -1900,13 +1941,13 @@ const NOS_METHODS = {
   },
   _wz_van() {
     const d = this._wz.d, v = d.van;
-    const opts = NOS_VANS.map((p) => `<option value="${p[0]}"${p[0] === v.model ? " selected" : ""}>${$esc(p[1])}</option>`).join("");
+    const opts = [...new Set(NOS_VANS.map((p) => p[5]))].map((g) => `<optgroup label="${$esc(g)}">${NOS_VANS.filter((p) => p[5] === g).map((p) => `<option value="${p[0]}"${p[0] === v.model ? " selected" : ""}>${$esc(p[1])}</option>`).join("")}</optgroup>`).join("");
     const photo = d.photo;
     return `<p class="wzk">Step 1</p><h2 class="wzh">Your van</h2>
      <div class="wz2"><div style="display:grid;gap:16px">
       <label class="wzfld"><span>Name or number plate</span><input class="wzi" data-f="van.plate" maxlength="14" value="${$esc(v.plate)}" placeholder="For example AB12 CDE, or the van's name"><small>Shown on the plate at the top of the screen. Up to 14 letters.</small></label>
       <div class="wzplate" id="wzPlate">${$esc((v.plate || "VAN").toUpperCase())}</div>
-      <label class="wzfld"><span>Van</span><select class="wzs" data-f="van.model">${opts}</select><small>Used to work out ramp heights on the Level page.</small></label>
+      <label class="wzfld"><span>Van</span><select class="wzs" data-f="van.model">${opts}</select><small>Picks the drawing of your van and works out ramp heights on the Level page. The sizes are typical for that van: check them against your own.</small></label>
       <div class="wz2"><label class="wzfld"><span>Wheelbase (mm)</span><input class="wzi" type="number" inputmode="numeric" data-f="van.wheelbase_mm" value="${$esc(v.wheelbase_mm)}"></label>
        <label class="wzfld"><span>Width between wheels (mm)</span><input class="wzi" type="number" inputmode="numeric" data-f="van.track_mm" value="${$esc(v.track_mm)}"></label></div>
      </div><div style="display:grid;gap:10px"><span class="wzk">Picture on the home screen</span>
@@ -2166,6 +2207,6 @@ Object.assign(VanCommandCentre.prototype, {
   _trips() { return []; },
   _renderTrips() { return undefined; },
 });
-window.__nomados = Object.assign(window.__nomados || {}, { VanCommandCentre, $esc, BLADE_COL, COMPASS8, DIRS, EXTRA_CSS, ICON, NOS_FEATURES, NOS_FUSE_GUESS, NOS_KEYS, NOS_MAX_BUTTONS, NOS_METHODS, NOS_OWN, NOS_STEPS, NOS_VANS, NOS_VAN_ART, P, REAR_VAN, SIDE_VAN, SWITCHES, SW_ICONS, SW_ICON_NAMES, T, TICKS, TOP_VAN, VCC_CSS, VCC_DAY3, VCC_DAYS, VCC_DEFAULT_ENTITIES, VCC_DEFAULT_PAGES, VCC_DISCOVER, VCC_FALLBACK, VCC_SOLAR_WP, VCC_TOPO, VCC_TRACK_MM, VCC_VAN, VCC_VERSION, VCC_WHEELBASE_MM, WZ_CSS, blocksToSlots, clamp, compass, demoForecast, demoFuses, demoSchedule, demoSeries, demoStates, demoWeather, fmt, fuseSvg, hm, markup, nosClone, nosSlug, num, osGridRef, pad2, row, scale, slotOf, slotsToBlocks, timeOf, vanArt, wmo });
+window.__nomados = Object.assign(window.__nomados || {}, { VanCommandCentre, $esc, BLADE_COL, COMPASS8, DIRS, EXTRA_CSS, ICON, NOS_FEATURES, NOS_FUSE_GUESS, NOS_KEYS, NOS_MAX_BUTTONS, NOS_METHODS, NOS_OWN, NOS_STEPS, NOS_VANS, P, REAR_VAN, SIDE_VAN, SWITCHES, SW_ICONS, SW_ICON_NAMES, T, TICKS, TOP_VAN, VCC_CSS, VCC_DAY3, VCC_DAYS, VCC_DEFAULT_ENTITIES, VCC_DEFAULT_PAGES, VCC_DISCOVER, VCC_FALLBACK, VCC_SOLAR_WP, VCC_TOPO, VCC_TRACK_MM, VCC_VAN, VCC_VERSION, VCC_WHEELBASE_MM, WZ_CSS, blocksToSlots, clamp, compass, demoForecast, demoFuses, demoSchedule, demoSeries, demoStates, demoWeather, fmt, fuseSvg, hm, markup, nosClone, nosSlug, num, osGridRef, pad2, row, scale, slotOf, slotsToBlocks, timeOf, vanArt, wmo });
 if (!customElements.get("nomados-panel")) customElements.define("nomados-panel", class extends VanCommandCentre {});
 console.info(`%c NOMADOS %c ${VCC_VERSION} `, "background:#7D8457;color:#111;font-weight:700", "background:#222;color:#ECE6DC");
