@@ -1,12 +1,21 @@
 {
   "domain": "nomados",
   "name": "NomadOS",
-  "codeowners": [],
+  "codeowners": [
+    "@Matto2494"
+  ],
   "config_flow": true,
-  "dependencies": ["http", "frontend", "panel_custom", "websocket_api", "persistent_notification"],
-  "documentation": "https://nomados.app",
+  "dependencies": [
+    "http",
+    "frontend",
+    "panel_custom",
+    "websocket_api",
+    "persistent_notification"
+  ],
+  "documentation": "https://github.com/Matto2494/N.O.M.A.D-OS",
   "integration_type": "service",
   "iot_class": "local_push",
+  "issue_tracker": "https://github.com/Matto2494/N.O.M.A.D-OS/issues",
   "requirements": [],
   "single_config_entry": true,
   "version": "2.2.0"
