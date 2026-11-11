@@ -1,4 +1,4 @@
-"""Adding NomadOS: one click, no questions. The questions are asked by the setup wizard on the NomadOS page."""
+"""Adding Nomad OS: one click, no questions. The questions are asked by the setup wizard on the Nomad OS page."""
 
 from __future__ import annotations
 
@@ -17,4 +17,4 @@ class NomadOSConfigFlow(ConfigFlow, domain=DOMAIN):
             return self.async_abort(reason="single_instance_allowed")
         if user_input is None:
             return self.async_show_form(step_id="user")
-        return self.async_create_entry(title="NomadOS", data={})
+        return self.async_create_entry(title="Nomad OS", data={})

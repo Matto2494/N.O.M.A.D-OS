@@ -1,7 +1,7 @@
-"""NomadOS: a full-screen campervan command centre for Home Assistant.
+"""Nomad OS: a full-screen campervan command centre for Home Assistant.
 
 What this integration does, so the owner never touches YAML:
-- adds the NomadOS page to the sidebar and serves its code,
+- adds the Nomad OS page to the sidebar and serves its code,
 - keeps the answers from the setup wizard (stored in /config/.storage/nomados.config),
 - makes the helpers the dashboard needs (night switch, heating controls),
 - runs the heating controller and the fuse checks itself.
@@ -50,7 +50,7 @@ PRO_FEATURES = ("heating", "fuses", "level", "trips")
 
 
 def _pro_info(hass: HomeAssistant) -> dict[str, Any] | None:
-    """Is NomadOS Pro added? (Runs in the executor: it reads a file.)"""
+    """Is Nomad OS Pro added? (Runs in the executor: it reads a file.)"""
     path = Path(hass.config.path("nomados", "pro", "nomados-pro.js"))
     if not path.is_file():
         return None
@@ -63,7 +63,7 @@ def _pro_info(hass: HomeAssistant) -> dict[str, Any] | None:
 
 
 class NomadData:
-    """Everything NomadOS keeps while running."""
+    """Everything Nomad OS keeps while running."""
 
     def __init__(self, hass: HomeAssistant, store: Store, config: dict[str, Any]) -> None:
         self.hass = hass
@@ -144,7 +144,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 def _own_entities(hass: HomeAssistant) -> dict[str, str]:
-    """Map NomadOS's own entities (by unique id) to their current entity ids.
+    """Map Nomad OS's own entities (by unique id) to their current entity ids.
 
     The owner can rename an entity in Home Assistant; the dashboard still finds it.
     """
@@ -161,7 +161,7 @@ def _own_entities(hass: HomeAssistant) -> dict[str, str]:
 def ws_get_config(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict) -> None:
     data: NomadData | None = hass.data.get(DOMAIN)
     if data is None:
-        connection.send_error(msg["id"], "not_loaded", "NomadOS is not set up")
+        connection.send_error(msg["id"], "not_loaded", "Nomad OS is not set up")
         return
     connection.send_result(
         msg["id"],
@@ -183,13 +183,13 @@ def ws_get_config(hass: HomeAssistant, connection: websocket_api.ActiveConnectio
 async def ws_save_config(hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict) -> None:
     data: NomadData | None = hass.data.get(DOMAIN)
     if data is None:
-        connection.send_error(msg["id"], "not_loaded", "NomadOS is not set up")
+        connection.send_error(msg["id"], "not_loaded", "Nomad OS is not set up")
         return
     new = dict(msg["config"])
     new["saved_with"] = VERSION
     await data.store.async_save(new)
     entries = hass.config_entries.async_entries(DOMAIN)
-    # Reload so NomadOS adds or removes its own helpers to match the features chosen
+    # Reload so Nomad OS adds or removes its own helpers to match the features chosen
     if entries:
         hass.async_create_task(hass.config_entries.async_reload(entries[0].entry_id))
     connection.send_result(msg["id"], {"ok": True})
@@ -236,10 +236,10 @@ async def ws_install_pro(hass: HomeAssistant, connection: websocket_api.ActiveCo
     data: NomadData | None = hass.data.get(DOMAIN)
     code: str = msg["code"]
     if data is None:
-        connection.send_error(msg["id"], "not_loaded", "NomadOS is not set up")
+        connection.send_error(msg["id"], "not_loaded", "Nomad OS is not set up")
         return
     if not code.startswith(PRO_MARK) or len(code.encode()) > MAX_PRO_BYTES:
-        connection.send_error(msg["id"], "not_pro", "That file isn't NomadOS Pro")
+        connection.send_error(msg["id"], "not_pro", "That file isn't Nomad OS Pro")
         return
 
     def _write() -> dict[str, Any] | None:

@@ -1,4 +1,4 @@
-"""NomadOS heating numbers: Warm to, Keep warm temperature and the battery guard."""
+"""Nomad OS heating numbers: Warm to, Keep warm temperature and the battery guard."""
 
 from __future__ import annotations
 

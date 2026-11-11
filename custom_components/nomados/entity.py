@@ -1,4 +1,4 @@
-"""Shared bits for NomadOS's own entities."""
+"""Shared bits for Nomad OS's own entities."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from .const import DOMAIN, SIGNAL_HEATING, VERSION
 
 
 class NomadEntity(Entity):
-    """An entity owned by NomadOS, grouped under one NomadOS device."""
+    """An entity owned by Nomad OS, grouped under one Nomad OS device."""
 
     _attr_has_entity_name = True
     _attr_should_poll = False
@@ -25,8 +25,8 @@ class NomadEntity(Entity):
         self.entity_id = entity_id
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, "nomados")},
-            name="NomadOS",
-            manufacturer="NomadOS",
+            name="Nomad OS",
+            manufacturer="Nomad OS",
             model="Van command centre",
             sw_version=VERSION,
         )

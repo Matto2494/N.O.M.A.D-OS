@@ -1,11 +1,11 @@
 /*
- * NomadOS: a full-screen campervan command centre for Home Assistant, made for a landscape tablet.
- * Installed by the NomadOS integration, which also stores the answers from the setup wizard.
+ * Nomad OS: a full-screen campervan command centre for Home Assistant, made for a landscape tablet.
+ * Installed by the Nomad OS integration, which also stores the answers from the setup wizard.
  * One file runs both pages: panel config `mode: live` reads your entities,
  * `mode: demo` shows example values (for showing off, or before the kit is fitted).
  * Entity ids can be overridden in configuration.yaml under panel_custom > config > entities.
  */
-const VCC_VERSION = "2.2.0";
+const VCC_VERSION = "2.2.1";
 
 // No built-in entity names: the setup wizard picks them for each van
 const VCC_DEFAULT_ENTITIES = {};
@@ -426,7 +426,7 @@ function markup(SW = SWITCHES) {
  <header class="bar">
   <div class="id"><span class="plate" id="plate">VAN</span><span class="pill" id="pill" aria-live="polite"><span class="pd"></span><span id="pillText">All systems normal</span></span></div>
   <div class="loc"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9" r="2.5" fill="currentColor"/></svg><span id="place">Locating…</span><span class="coord" id="coord"></span></div>
-  <div class="sys"><span class="sig" id="sig" hidden><i></i><i></i><i></i><i></i></span><span id="net" hidden>4G</span><span class="dot" hidden></span><span id="vrm">Online</span><span class="dot" id="ptDot"></span><span id="pitemp">Pi —</span><button type="button" class="cog" id="nosSetup" hidden aria-label="NomadOS setup"><svg viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+  <div class="sys"><span class="sig" id="sig" hidden><i></i><i></i><i></i><i></i></span><span id="net" hidden>4G</span><span class="dot" hidden></span><span id="vrm">Online</span><span class="dot" id="ptDot"></span><span id="pitemp">Pi —</span><button type="button" class="cog" id="nosSetup" hidden aria-label="Nomad OS setup"><svg viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
  </header>
  <div class="main">
   <section class="left">
@@ -1431,12 +1431,12 @@ class VanCommandCentre extends HTMLElement {
 
 
 /* =====================================================================
- * NomadOS settings and the setup wizard
- * The answers live in Home Assistant (the NomadOS integration stores them),
+ * Nomad OS settings and the setup wizard
+ * The answers live in Home Assistant (the Nomad OS integration stores them),
  * so every tablet and phone shows the same dashboard.
  * ===================================================================== */
 
-// NomadOS's own helpers (by unique id) and the dashboard key each one fills
+// Nomad OS's own helpers (by unique id) and the dashboard key each one fills
 const NOS_OWN = {
   night_mode: "sw_night", heating_mode: "heat_mode", heating_warm_to: "heat_comfort",
   heating_keep_warm_temperature: "heat_keep_temp", heating_battery_guard: "heat_min_soc",
@@ -1560,7 +1560,7 @@ const NOS_STEPS = {
   welcome: { t: "Welcome" },
   van: { t: "Your van" },
   kit: { t: "What's fitted" },
-  pro: { t: "NomadOS Pro" },
+  pro: { t: "Nomad OS Pro" },
   power: { t: "Battery & solar", keys: ["soc", "batt_voltage", "batt_current", "batt_power", "time_to_go", "solar", "solar_today", "ac_load", "dc_load", "shore_power", "shore_voltage", "alternator", "inverter_mode", "shore_limit"], f: "power" },
   water: { t: "Water", keys: ["fresh", "waste"], f: "water" },
   climate: { t: "Climate", keys: ["cabin_temp", "cabin_humidity", "outside_temp", "fridge_temp", "hot_water", "heater_running"], f: "climate" },
@@ -1678,8 +1678,8 @@ const NOS_METHODS = {
       await this._loadPro(r);
       this._applyNomad(r);
     } catch (e) {
-      // The NomadOS integration isn't added (or is still starting): show what the page config says
-      console.warn("NomadOS: settings not available", e);
+      // The Nomad OS integration isn't added (or is still starting): show what the page config says
+      console.warn("Nomad OS: settings not available", e);
       this._nos = { failed: true, config: {}, own: {} };
     }
     this._nosLoading = false;
@@ -1688,7 +1688,7 @@ const NOS_METHODS = {
   async _loadPro(r) {
     const pro = r && r.pro;
     if (!pro || !pro.url || window.__nomados.pro) { this._pro = !!window.__nomados.pro; return; }
-    try { await import(pro.url); } catch (e) { console.warn("NomadOS: Pro didn't load", e); }
+    try { await import(pro.url); } catch (e) { console.warn("Nomad OS: Pro didn't load", e); }
     this._pro = !!window.__nomados.pro;
   },
   _applyNomad(r) {
@@ -1860,7 +1860,7 @@ const NOS_METHODS = {
     const body = !isAdmin ? this._wzNotAdmin() : this[`_wz_${cur}`]();
     const last = cur === "finish";
     this.$("wz").innerHTML = `
-     <header class="lh"><span class="brand">NomadOS</span><span class="lt2">Setup</span><span class="wzc">${w.i + 1} of ${steps.length} · ${$esc(NOS_STEPS[cur].t)}</span>
+     <header class="lh"><span class="brand">Nomad OS</span><span class="lt2">Setup</span><span class="wzc">${w.i + 1} of ${steps.length} · ${$esc(NOS_STEPS[cur].t)}</span>
       <button type="button" class="lx" data-wz="close"${w.first ? " hidden" : ""}>Close</button></header>
      <div class="wzb"><nav class="wzr" aria-label="Setup steps">${rail}</nav><section class="wzm" id="wzMain">${body}</section></div>
      <footer class="wzf"><button type="button" class="hb" data-wz="back"${w.i === 0 || !isAdmin ? " disabled" : ""}>Back</button><span class="wzmsg" id="wzMsg"></span>
@@ -1924,13 +1924,13 @@ const NOS_METHODS = {
   _wzMax() { return this._pro ? NOS_MAX_BUTTONS : 5; },
   _wzNightAt() { const s = this._wz.d.switches, n = s.findIndex((x) => x.special === "night"); return n < 0 ? s.length : n; },
   _wzNotAdmin() {
-    return `<p class="wzk">Setup</p><h2 class="wzh">Almost ready</h2><p class="wzp">NomadOS hasn't been set up yet, and setting it up needs a Home Assistant administrator. Ask whoever installed Home Assistant to open <b>NomadOS</b> in the sidebar and follow the setup.</p>`;
+    return `<p class="wzk">Setup</p><h2 class="wzh">Almost ready</h2><p class="wzp">Nomad OS hasn't been set up yet, and setting it up needs a Home Assistant administrator. Ask whoever installed Home Assistant to open <b>Nomad OS</b> in the sidebar and follow the setup.</p>`;
   },
 
   /* steps */
   _wz_welcome() {
-    return `<div class="wzbig"><div style="display:grid;gap:18px"><p class="wzk">Welcome to NomadOS</p><h2 class="wzh" style="font-size:56px">Let's set up<br>your van</h2>
-      <p class="wzp">This takes about five minutes. NomadOS has already looked through Home Assistant for your kit, so most answers are filled in. Check them, change anything that's wrong, and press Next.</p>
+    return `<div class="wzbig"><div style="display:grid;gap:18px"><p class="wzk">Welcome to Nomad OS</p><h2 class="wzh" style="font-size:56px">Let's set up<br>your van</h2>
+      <p class="wzp">This takes about five minutes. Nomad OS has already looked through Home Assistant for your kit, so most answers are filled in. Check them, change anything that's wrong, and press Next.</p>
       <ul><li><i>1</i><span>Tell it about your van and add a photo.</span></li><li><i>2</i><span>Tick what's fitted: batteries, tanks, heater, sensors.</span></li><li><i>3</i><span>Check the sensors it found and pick your buttons.</span></li></ul>
       <p class="wzp" style="font-size:13.5px;color:var(--muted)">Nothing here changes your wiring or your other Home Assistant settings. You can come back any time with the cog at the top right of the dashboard.</p></div>
       <img src="${this._cfg.photo || this._wzSample()}" alt=""></div>`;
@@ -1970,7 +1970,7 @@ const NOS_METHODS = {
       trips: e.fuel ? `Found · fuel ${this._nosVal(e.fuel)}` : "",
     };
     return `<p class="wzk">Step 2</p><h2 class="wzh">What's fitted?</h2>
-      <p class="wzp">Tap to switch each one on or off. NomadOS has switched on the ones it found. Anything you leave off is hidden from the dashboard, and you can add it later.</p>
+      <p class="wzp">Tap to switch each one on or off. Nomad OS has switched on the ones it found. Anything you leave off is hidden from the dashboard, and you can add it later.</p>
       <div class="wzg">${NOS_FEATURES.map(([k, t, s, pro]) => pro && !this._pro
         ? `<button type="button" class="wzt locked" data-wz="topro"><span class="led"></span><b>${t}</b><small>${s}</small><em class="pro">Pro${found[k] ? ` · ${$esc(found[k].replace(/^Found · /, "found "))}` : ""}</em></button>`
         : `<button type="button" class="wzt${d.features[k] ? " on" : ""}" data-feat="${k}" aria-pressed="${!!d.features[k]}"><span class="led"></span><b>${t}</b><small>${s}</small><em class="${found[k] ? "" : "no"}">${$esc(found[k] || "Not found yet")}</em></button>`).join("")}
@@ -1998,14 +1998,14 @@ const NOS_METHODS = {
   _wz_pro() {
     const n = this._wzSteps().indexOf("pro");
     if (this._pro) return `<p class="wzk">Step ${n}</p><h2 class="wzh">Pro is on</h2>
-      <p class="wzp">Thanks for supporting NomadOS. Heating times, fuse alerts, the Level page, fuel and trips, every weather tab, the solar forecast and up to ${NOS_MAX_BUTTONS} buttons are all unlocked. Switch them on in the step before this one.</p>
-      <div class="tp"><b style="font-size:15px">Version</b><p class="mnote">NomadOS Pro ${$esc(window.__nomados.pro.version || "")}</p></div>`;
-    return `<p class="wzk">Step ${n} · optional</p><h2 class="wzh">NomadOS Pro</h2>
+      <p class="wzp">Thanks for supporting Nomad OS. Heating times, fuse alerts, the Level page, fuel and trips, every weather tab, the solar forecast and up to ${NOS_MAX_BUTTONS} buttons are all unlocked. Switch them on in the step before this one.</p>
+      <div class="tp"><b style="font-size:15px">Version</b><p class="mnote">Nomad OS Pro ${$esc(window.__nomados.pro.version || "")}</p></div>`;
+    return `<p class="wzk">Step ${n} · optional</p><h2 class="wzh">Nomad OS Pro</h2>
       <p class="wzp">Lite is free, and it's yours to keep. Pro adds the things that make van life easier. You can skip this and add Pro any time from the cog.</p>
       <div class="wz2"><div class="tp"><b style="font-size:16px">Pro adds</b><ul class="wzul"><li>Heating page: weekly times, Boost, Keep warm and a battery guard</li><li>Fuse alerts, from your Victron kit or a fuse sensor box</li><li>Level page with ramp heights, and a compass</li><li>Fuel, trips and engine readings from an OBD reader</li><li>Every weather tab: 12 hours, wind, sun and rain radar</li><li>Solar forecast against what you actually made</li><li>Up to ${NOS_MAX_BUTTONS} buttons along the bottom</li></ul></div>
        <div style="display:grid;gap:12px;align-content:start">
-        <label class="wzfld"><span>Licence key</span><input class="wzi" id="wzKey" placeholder="From your NomadOS Pro email" disabled><small>Buying Pro and unlocking it with a key arrives with the shop.</small></label>
-        <div class="tp"><b style="font-size:15px">Testing Pro?</b><p class="mnote">If you've been given the NomadOS Pro file, add it here. It's saved in Home Assistant, so you only do this once.</p><div class="wzbtns"><button type="button" class="hb pri" data-wz="profile">Add the Pro file</button></div></div>
+        <label class="wzfld"><span>Licence key</span><input class="wzi" id="wzKey" placeholder="From your Nomad OS Pro email" disabled><small>Buying Pro and unlocking it with a key arrives with the shop.</small></label>
+        <div class="tp"><b style="font-size:15px">Testing Pro?</b><p class="mnote">If you've been given the Nomad OS Pro file, add it here. It's saved in Home Assistant, so you only do this once.</p><div class="wzbtns"><button type="button" class="hb pri" data-wz="profile">Add the Pro file</button></div></div>
         <input type="file" id="wzProFile" accept=".js,text/javascript" hidden></div></div>`;
   },
   async _wzProInstall(file) {
@@ -2015,7 +2015,7 @@ const NOS_METHODS = {
       const code = await file.text();
       const r = await this._hass.callWS({ type: "nomados/pro/install", code });
       await this._loadPro({ pro: r });
-      if (!this._pro) throw new Error("That file isn't NomadOS Pro");
+      if (!this._pro) throw new Error("That file isn't Nomad OS Pro");
       this._wz.d.features_set = false;
       this._wzAuto(this._wz.d);
       this._wzRender(); this._wzMsg("Pro is on");
@@ -2023,7 +2023,7 @@ const NOS_METHODS = {
   },
   _wz_power() {
     const d = this._wz.d;
-    return `${this._wzStepHead("power", "Battery & solar", "These are the readings NomadOS found. Green outlines are its guesses: check the live reading on the right looks right. Pick <b>Not fitted</b> for anything you don't have.")}
+    return `${this._wzStepHead("power", "Battery & solar", "These are the readings Nomad OS found. Green outlines are its guesses: check the live reading on the right looks right. Pick <b>Not fitted</b> for anything you don't have.")}
      <div class="wz3"><label class="wzfld"><span>Battery size (Ah)</span><input class="wzi" type="number" data-f="battery_ah" value="${$esc(d.battery_ah)}"></label>
       <label class="wzfld"><span>Battery voltage</span><select class="wzs" data-f="battery_v">${[[12.8, "12 V"], [25.6, "24 V"], [51.2, "48 V"]].map(([v, l]) => `<option value="${v}"${Number(d.battery_v) === v ? " selected" : ""}>${l}</option>`).join("")}</select></label>
       <label class="wzfld"><span>Solar panels (watts)</span><input class="wzi" type="number" data-f="solar_wp" value="${$esc(d.solar_wp)}"></label></div>
@@ -2031,18 +2031,18 @@ const NOS_METHODS = {
   },
   _wz_water() {
     const d = this._wz.d;
-    return `${this._wzStepHead("water", "Water", "Tank levels in %. NomadOS uses the fresh tank size to say how many litres are left.")}
+    return `${this._wzStepHead("water", "Water", "Tank levels in %. Nomad OS uses the fresh tank size to say how many litres are left.")}
      <div class="wz3"><label class="wzfld"><span>Fresh tank size (litres)</span><input class="wzi" type="number" data-f="fresh_litres" value="${$esc(d.fresh_litres)}"></label></div>
      ${this._wzRows(NOS_STEPS.water.keys)}`;
   },
   _wz_climate() { return `${this._wzStepHead("climate", "Climate", "Temperature and humidity sensors. Zigbee sensors such as Sonoff or Aqara work well. The inside sensor also lets the heating hold a temperature.")}${this._wzRows(NOS_STEPS.climate.keys)}`; },
   _wz_heating() {
     const e = this._wz.d.entities;
-    return `${this._wzStepHead("heating", "Heating", "Pick the smart relay wired to your heater's remote-start. NomadOS then adds a Heating page: weekly heating times, Boost, Keep warm, and a battery guard that won't start the heater on a low battery.")}
+    return `${this._wzStepHead("heating", "Heating", "Pick the smart relay wired to your heater's remote-start. Nomad OS then adds a Heating page: weekly heating times, Boost, Keep warm, and a battery guard that won't start the heater on a low battery.")}
      ${this._wzRows(["sw_heater"])}
      <div class="wzwarn">If something else already switches this heater (an automation, a thermostat or a schedule you made yourself), turn that off first, or the two will fight.</div>
      <div class="tp"><b style="font-size:15px">How it holds the temperature</b><p class="mnote">${e.cabin_temp ? `It uses <b>${$esc(this._nosName(e.cabin_temp))}</b> (${$esc(this._nosVal(e.cabin_temp) || "no reading")}) from the Climate step. Once the heater starts, it runs for at least 20 minutes, because diesel heaters soot up on short runs.` : "No inside temperature sensor was picked, so it runs the heater by the clock: on during your heating times, off outside them. The heater's own controls set how hot it gets. Add an inside sensor later to hold a temperature."}</p></div>
-     <p class="wzp" style="font-size:13.5px;color:var(--muted)">Your heater's own panel keeps working as normal. NomadOS only decides when it runs.</p>`;
+     <p class="wzp" style="font-size:13.5px;color:var(--muted)">Your heater's own panel keeps working as normal. Nomad OS only decides when it runs.</p>`;
   },
   _wz_switches() {
     const d = this._wz.d, s = d.switches, f = d.features;
@@ -2074,7 +2074,7 @@ const NOS_METHODS = {
       <select class="wzs" data-fz="${i}" data-k="entity" aria-label="Reading">${x.check === "victron" ? vOpts(x.entity) : bOpts(x.entity)}</select>
       <input class="wzi" data-fz="${i}" data-k="rating" value="${$esc(x.rating)}" placeholder="Size, e.g. 15 A" aria-label="Fuse size"><button type="button" class="wzx" data-wz="fzdel" data-i="${i}">Remove</button></div>`;
     const vic = d.fuses.map((x, i) => (x.check === "victron" ? row(x, i) : "")).join(""), sen = d.fuses.map((x, i) => (x.check === "sense" ? row(x, i) : "")).join("");
-    return `${this._wzStepHead("fuses", "Fuses", "NomadOS can spot a blown fuse two ways. You get an alert on the screen and in Home Assistant.")}
+    return `${this._wzStepHead("fuses", "Fuses", "Nomad OS can spot a blown fuse two ways. You get an alert on the screen and in Home Assistant.")}
      ${d.entities.batt_voltage ? "" : '<div class="wzwarn">Pick a battery voltage on the Battery &amp; solar step first. Fuse checks compare against it.</div>'}
      <div class="wz2"><div style="display:grid;gap:10px"><span class="wzk">Victron check · free</span><p class="mnote">Your inverter, solar charger and alternator charger each measure the battery themselves. If one stops reporting, or sees a very different voltage from the battery monitor for 3 minutes, its fuse has gone.</p></div>
       <div style="display:grid;gap:10px"><span class="wzk">Sense wire · needs a fuse sensor box</span><p class="mnote">A thin wire from the output side of each fuse goes to a small box (an ESP32 and an optocoupler board, about £30). No power on the wire means the fuse has blown.</p></div></div>
@@ -2094,7 +2094,7 @@ const NOS_METHODS = {
     const card = (on, t, p) => `<div class="tp"><b>${t}</b><p>${on ? p : "Off. Turn it on any time from the cog."}</p></div>`;
     const btns = d.switches.map((s) => s.name || "Switch").join(", ");
     return `<p class="wzk">Last step</p><h2 class="wzh">Ready to go</h2>
-     <p class="wzp">Press Finish and NomadOS saves this and makes what it needs. That includes ${f.heating ? "the heating controls, " : ""}${f.fuses ? "the fuse alerts, " : ""}the Night switch and the plate. Then your dashboard opens.</p>
+     <p class="wzp">Press Finish and Nomad OS saves this and makes what it needs. That includes ${f.heating ? "the heating controls, " : ""}${f.fuses ? "the fuse alerts, " : ""}the Night switch and the plate. Then your dashboard opens.</p>
      <div class="wzsum">
       <div class="tp"><b>${$esc((d.van.plate || "VAN").toUpperCase())} · ${$esc(d.van.short || "")}</b><p>${d.photo ? "Your own photo" : "The sample van picture"}. ${Math.round((d.battery_ah || 0) * (d.battery_v || 12.8) / 100) / 10} kWh battery, ${$esc(d.solar_wp || 0)} W of solar.</p></div>
       ${card(f.power, "Battery & solar", `${cnt(NOS_STEPS.power.keys)} of ${NOS_STEPS.power.keys.length} readings connected.`)}
@@ -2143,7 +2143,7 @@ const NOS_METHODS = {
     this.shadowRoot.querySelectorAll(".wzf .hb").forEach((b) => { b.disabled = true; });
     try {
       await this._hass.callWS({ type: "nomados/config/save", config: d });
-      // NomadOS restarts itself to add or remove its helpers; wait for them to appear
+      // Nomad OS restarts itself to add or remove its helpers; wait for them to appear
       let r = null;
       for (let i = 0; i < 20; i++) {
         await new Promise((ok) => setTimeout(ok, 500));
@@ -2151,7 +2151,7 @@ const NOS_METHODS = {
         const own = r.own || {};
         if (r.config && r.config.setup_done && own.night_mode && (!d.features.heating || own.heating_mode) && this._hass.states[own.night_mode]) break;
       }
-      if (!r) throw new Error("NomadOS didn't come back after saving. Reload the page.");
+      if (!r) throw new Error("Nomad OS didn't come back after saving. Reload the page.");
       this._wz = null;
       this._applyNomad(r);
       this._ready = false;
