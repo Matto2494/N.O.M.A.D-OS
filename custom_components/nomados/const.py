@@ -1,10 +1,10 @@
-"""Constants for NomadOS."""
+"""Constants for Nomad OS."""
 
 DOMAIN = "nomados"
-VERSION = "2.2.0"
+VERSION = "2.2.1"
 
 PANEL_URL = "nomados"
-PANEL_TITLE = "NomadOS"
+PANEL_TITLE = "Nomad OS"
 PANEL_ICON = "mdi:van-utility"
 PANEL_ELEMENT = "nomados-panel"
 
@@ -14,7 +14,7 @@ FILES_URL = "/nomados_files"  # the owner's own files (van photo), kept in /conf
 STORE_KEY = "nomados.config"
 STORE_VERSION = 1
 
-# Entities NomadOS makes for itself. The dashboard is told these ids.
+# Entities Nomad OS makes for itself. The dashboard is told these ids.
 NIGHT = "switch.nomados_night_mode"
 HEAT_MODE = "select.nomados_heating_mode"
 HEAT_COMFORT = "number.nomados_heating_warm_to"

@@ -1,4 +1,4 @@
-"""NomadOS switches: Night (dims the screen), and the heating Keep warm and Boost."""
+"""Nomad OS switches: Night (dims the screen), and the heating Keep warm and Boost."""
 
 from __future__ import annotations
 

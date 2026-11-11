@@ -1,4 +1,4 @@
-"""NomadOS heating mode: Off, Schedule or On."""
+"""Nomad OS heating mode: Off, Schedule or On."""
 
 from __future__ import annotations
 

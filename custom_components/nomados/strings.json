@@ -2,12 +2,12 @@
   "config": {
     "step": {
       "user": {
-        "title": "Add NomadOS",
-        "description": "Press Submit. A NomadOS page then appears in the sidebar on the left. Open it and the setup takes you through the rest."
+        "title": "Add Nomad OS",
+        "description": "Press Submit. A Nomad OS page then appears in the sidebar on the left. Open it and the setup takes you through the rest."
       }
     },
     "abort": {
-      "single_instance_allowed": "NomadOS is already added. Open NomadOS in the sidebar."
+      "single_instance_allowed": "Nomad OS is already added. Open Nomad OS in the sidebar."
     }
   }
 }

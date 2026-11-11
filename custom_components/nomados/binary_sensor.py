@@ -1,4 +1,4 @@
-"""NomadOS fuse checks. Each fuse is a 'problem' sensor: on means blown.
+"""Nomad OS fuse checks. Each fuse is a 'problem' sensor: on means blown.
 
 Two ways of checking:
 - Victron check: a Victron device (inverter, solar charger, DC-DC charger) measures

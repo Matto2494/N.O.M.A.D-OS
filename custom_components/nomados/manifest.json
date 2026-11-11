@@ -1,6 +1,6 @@
 {
   "domain": "nomados",
-  "name": "NomadOS",
+  "name": "Nomad OS",
   "codeowners": [
     "@Matto2494"
   ],
@@ -18,5 +18,5 @@
   "issue_tracker": "https://github.com/Matto2494/N.O.M.A.D-OS/issues",
   "requirements": [],
   "single_config_entry": true,
-  "version": "2.2.0"
+  "version": "2.2.1"
 }
